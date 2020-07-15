@@ -1,10 +1,18 @@
 {
     "type": "project",
     "license": "proprietary",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.immediate.co.uk/WCP-Packages/im-auth-token-generator.git"
+        }
+    ],
     "require": {
         "php": "^7.2.5",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "guzzlehttp/guzzle": "^6.0",
+        "immediate/im-auth-token-generator": "^1.0",
         "symfony/console": "5.0.*",
         "symfony/dotenv": "5.0.*",
         "symfony/finder": "5.0.*",

@@ -30,3 +30,23 @@ services:
         arguments:
             - '@App\Handler\DayOnePartOne'
             - '@App\Handler\DayOnePartTwo'
+
+    IM\Fabric\Package\Security\TokenGenerator\:
+        resource: '../vendor/immediate/im-auth-token-generator/src/*'
+
+    IM\Fabric\Package\Security\TokenGenerator\DataProvider\AuthSettingsProviderInterface: '@App\DataProvider\IdentityAuthSettings'
+    IM\Fabric\Package\Security\TokenGenerator\Cache\CacheInterface: '@App\Cache\AccessTokenCache'
+
+    App\DataProvider\IdentityAuthSettings:
+        arguments:
+            $provider: '%env(string:AUTH_SETTINGS_IDENTITY_PROVIDER)%'
+            $identityBaseUrl: '%env(string:AUTH_SETTINGS_IDENTITY_BASE_URL)%'
+            $identityClientId: '%env(string:AUTH_SETTINGS_IDENTITY_CLIENT_ID)%'
+            $identityClientSecret: '%env(string:AUTH_SETTINGS_IDENTITY_CLIENT_SECRET)%'
+
+    GuzzleHttp\Client:
+
+    App\Command\ReactionsSync:
+        arguments:
+            $reactionsBaseUrl: '%env(string:REACTIONS_BASE_URL)%'
+            $authenticator: '@IM\Fabric\Package\Security\TokenGenerator\OAuth2\IdentityAuthenticator'
